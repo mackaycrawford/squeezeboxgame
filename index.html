@@ -1,0 +1,907 @@
+<html>
+
+  <head>
+    <script src="jquery.js"></script>
+    <script src="ping.js"></script>
+	<script src="gameHistory.js"></script>
+    <script src="board.js"></script>
+    <script src="app.js"></script>
+    <script src="underscore.js"></script>
+
+
+    <link href="style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+  </head>
+
+  <body>
+    <section class="text-center space--xs">
+      <div class="container">
+        <div class="row" id="statusRow">
+          <div class="col-lg-2 col-md-2">
+            <div class="card">
+              <div class="card-header">
+                Game Status
+              </div>
+              <div class="card-body">
+                In Progress
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="card">
+              <div class="card-header">
+                Current Turn
+              </div>
+              <div class="card-body" id="activePlayer">
+                Player One
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="card">
+              <div class="card-header">
+                Moves Left
+              </div>
+              <div class="card-body" id="movesCount">
+                15
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="card">
+              <div class="card-header">
+                Turn Time
+              </div>
+              <div class="card-body">
+                &infin;
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="text-center space--xs">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 text-center">
+                <div class="row" id="board">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="square notVisible" id="a_1"></div>
+                    <div class="square notVisible" id="a_2"></div>
+                    <div class="square notVisible" id="a_3"></div>
+                    <div class="square notVisible" id="a_4"></div>
+                    <div class="square notVisible" id="a_5"></div>
+                    <div class="square notVisible" id="a_6"></div>
+                    <div class="square notVisible" id="a_7"></div>
+                    <div class="square notVisible" id="a_8"></div>
+                    <div class="square notVisible" id="a_9"></div>
+                    <div class="square notVisible" id="a_10"></div>
+                    <div class="square notVisible" id="a_11"></div>
+                    <div class="square notVisible" id="a_12"></div>
+                    <div class="square notVisible" id="a_13"></div>
+                    <div class="square notVisible" id="a_14"></div>
+                    <div class="square notVisible" id="a_15"></div>
+                    <div class="square notVisible" id="a_16"></div>
+                    <div class="square notVisible" id="a_17"></div>
+                    <div class="square notVisible" id="a_18"></div>
+                    <div class="square notVisible" id="a_19"></div>
+                    <div class="square notVisible" id="a_20"></div>
+                    <div class="square notVisible" id="a_21"></div>
+                    <div class="square notVisible" id="a_22"></div>
+                    <div class="square notVisible" id="a_23"></div>
+                    <div class="square notVisible" id="a_24"></div>
+                    <div class="square notVisible" id="a_25"></div>
+                    <div class="square notVisible" id="a_26"></div>
+                    <div class="square notVisible" id="a_27"></div>
+                    <div class="square notVisible" id="a_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="b_1"></div>
+                    <div class="square notVisible" id="b_2"></div>
+                    <div class="square notVisible" id="b_3"></div>
+                    <div class="square notVisible" id="b_4"></div>
+                    <div class="square notVisible" id="b_5"></div>
+                    <div class="square notVisible" id="b_6"></div>
+                    <div class="square notVisible" id="b_7"></div>
+                    <div class="square notVisible" id="b_8"></div>
+                    <div class="square notVisible" id="b_9"></div>
+                    <div class="square notVisible" id="b_10"></div>
+                    <div class="square notVisible" id="b_11"></div>
+                    <div class="square notVisible" id="b_12"></div>
+                    <div class="square notVisible" id="b_13"></div>
+                    <div class="square notVisible" id="b_14"></div>
+                    <div class="square notVisible" id="b_15"></div>
+                    <div class="square notVisible" id="b_16"></div>
+                    <div class="square notVisible" id="b_17"></div>
+                    <div class="square notVisible" id="b_18"></div>
+                    <div class="square notVisible" id="b_19"></div>
+                    <div class="square notVisible" id="b_20"></div>
+                    <div class="square notVisible" id="b_21"></div>
+                    <div class="square notVisible" id="b_22"></div>
+                    <div class="square notVisible" id="b_23"></div>
+                    <div class="square notVisible" id="b_24"></div>
+                    <div class="square notVisible" id="b_25"></div>
+                    <div class="square notVisible" id="b_26"></div>
+                    <div class="square notVisible" id="b_27"></div>
+                    <div class="square notVisible" id="b_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="c_1"></div>
+                    <div class="square notVisible" id="c_2"></div>
+                    <div class="square notVisible" id="c_3"></div>
+                    <div class="square notVisible" id="c_4"></div>
+                    <div class="square notVisible" id="c_5"></div>
+                    <div class="square notVisible" id="c_6"></div>
+                    <div class="square notVisible" id="c_7"></div>
+                    <div class="square notVisible" id="c_8"></div>
+                    <div class="square notVisible" id="c_9"></div>
+                    <div class="square notVisible" id="c_10"></div>
+                    <div class="square notVisible" id="c_11"></div>
+                    <div class="square notVisible" id="c_12"></div>
+                    <div class="square notVisible" id="c_13"></div>
+                    <div class="square notVisible" id="c_14"></div>
+                    <div class="square notVisible" id="c_15"></div>
+                    <div class="square notVisible" id="c_16"></div>
+                    <div class="square notVisible" id="c_17"></div>
+                    <div class="square notVisible" id="c_18"></div>
+                    <div class="square notVisible" id="c_19"></div>
+                    <div class="square notVisible" id="c_20"></div>
+                    <div class="square notVisible" id="c_21"></div>
+                    <div class="square notVisible" id="c_22"></div>
+                    <div class="square notVisible" id="c_23"></div>
+                    <div class="square notVisible" id="c_24"></div>
+                    <div class="square notVisible" id="c_25"></div>
+                    <div class="square notVisible" id="c_26"></div>
+                    <div class="square notVisible" id="c_27"></div>
+                    <div class="square notVisible" id="c_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="d_1"></div>
+                    <div class="square notVisible" id="d_2"></div>
+                    <div class="square notVisible" id="d_3"></div>
+                    <div class="square notVisible" id="d_4"></div>
+                    <div class="square notVisible" id="d_5"></div>
+                    <div class="square notVisible" id="d_6"></div>
+                    <div class="square notVisible" id="d_7"></div>
+                    <div class="square notVisible" id="d_8"></div>
+                    <div class="square notVisible" id="d_9"></div>
+                    <div class="square notVisible" id="d_10"></div>
+                    <div class="square notVisible" id="d_11"></div>
+                    <div class="square notVisible" id="d_12"></div>
+                    <div class="square notVisible" id="d_13"></div>
+                    <div class="square notVisible" id="d_14"></div>
+                    <div class="square notVisible" id="d_15"></div>
+                    <div class="square notVisible" id="d_16"></div>
+                    <div class="square notVisible" id="d_17"></div>
+                    <div class="square notVisible" id="d_18"></div>
+                    <div class="square notVisible" id="d_19"></div>
+                    <div class="square notVisible" id="d_20"></div>
+                    <div class="square notVisible" id="d_21"></div>
+                    <div class="square notVisible" id="d_22"></div>
+                    <div class="square notVisible" id="d_23"></div>
+                    <div class="square notVisible" id="d_24"></div>
+                    <div class="square notVisible" id="d_25"></div>
+                    <div class="square notVisible" id="d_26"></div>
+                    <div class="square notVisible" id="d_27"></div>
+                    <div class="square notVisible" id="d_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="e_1"></div>
+                    <div class="square notVisible" id="e_2"></div>
+                    <div class="square notVisible" id="e_3"></div>
+                    <div class="square notVisible" id="e_4"></div>
+                    <div class="square notVisible" id="e_5"></div>
+                    <div class="square notVisible" id="e_6"></div>
+                    <div class="square notVisible" id="e_7"></div>
+                    <div class="square notVisible" id="e_8"></div>
+                    <div class="square notVisible" id="e_9"></div>
+                    <div class="square notVisible" id="e_10"></div>
+                    <div class="square notVisible" id="e_11"></div>
+                    <div class="square notVisible" id="e_12"></div>
+                    <div class="square notVisible" id="e_13"></div>
+                    <div class="square notVisible" id="e_14"></div>
+                    <div class="square notVisible" id="e_15"></div>
+                    <div class="square notVisible" id="e_16"></div>
+                    <div class="square notVisible" id="e_17"></div>
+                    <div class="square notVisible" id="e_18"></div>
+                    <div class="square notVisible" id="e_19"></div>
+                    <div class="square notVisible" id="e_20"></div>
+                    <div class="square notVisible" id="e_21"></div>
+                    <div class="square notVisible" id="e_22"></div>
+                    <div class="square notVisible" id="e_23"></div>
+                    <div class="square notVisible" id="e_24"></div>
+                    <div class="square notVisible" id="e_25"></div>
+                    <div class="square notVisible" id="e_26"></div>
+                    <div class="square notVisible" id="e_27"></div>
+                    <div class="square notVisible" id="e_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="f_1"></div>
+                    <div class="square notVisible" id="f_2"></div>
+                    <div class="square notVisible" id="f_3"></div>
+                    <div class="square notVisible" id="f_4"></div>
+                    <div class="square notVisible" id="f_5"></div>
+                    <div class="square notVisible" id="f_6"></div>
+                    <div class="square notVisible" id="f_7"></div>
+                    <div class="square notVisible" id="f_8"></div>
+                    <div class="square notVisible" id="f_9"></div>
+                    <div class="square notVisible" id="f_10"></div>
+                    <div class="square notVisible" id="f_11"></div>
+                    <div class="square notVisible" id="f_12"></div>
+                    <div class="square notVisible" id="f_13"></div>
+                    <div class="square notVisible" id="f_14"></div>
+                    <div class="square notVisible" id="f_15"></div>
+                    <div class="square notVisible" id="f_16"></div>
+                    <div class="square notVisible" id="f_17"></div>
+                    <div class="square notVisible" id="f_18"></div>
+                    <div class="square notVisible" id="f_19"></div>
+                    <div class="square notVisible" id="f_20"></div>
+                    <div class="square notVisible" id="f_21"></div>
+                    <div class="square notVisible" id="f_22"></div>
+                    <div class="square notVisible" id="f_23"></div>
+                    <div class="square notVisible" id="f_24"></div>
+                    <div class="square notVisible" id="f_25"></div>
+                    <div class="square notVisible" id="f_26"></div>
+                    <div class="square notVisible" id="f_27"></div>
+                    <div class="square notVisible" id="f_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="g_1"></div>
+                    <div class="square notVisible" id="g_2"></div>
+                    <div class="square notVisible" id="g_3"></div>
+                    <div class="square notVisible" id="g_4"></div>
+                    <div class="square notVisible" id="g_5"></div>
+                    <div class="square notVisible" id="g_6"></div>
+                    <div class="square notVisible" id="g_7"></div>
+                    <div class="square notVisible" id="g_8"></div>
+                    <div class="square notVisible" id="g_9"></div>
+                    <div class="square notVisible" id="g_10"></div>
+                    <div class="square notVisible" id="g_11"></div>
+                    <div class="square notVisible" id="g_12"></div>
+                    <div class="square notVisible" id="g_13"></div>
+                    <div class="square notVisible" id="g_14"></div>
+                    <div class="square notVisible" id="g_15"></div>
+                    <div class="square notVisible" id="g_16"></div>
+                    <div class="square notVisible" id="g_17"></div>
+                    <div class="square notVisible" id="g_18"></div>
+                    <div class="square notVisible" id="g_19"></div>
+                    <div class="square notVisible" id="g_20"></div>
+                    <div class="square notVisible" id="g_21"></div>
+                    <div class="square notVisible" id="g_22"></div>
+                    <div class="square notVisible" id="g_23"></div>
+                    <div class="square notVisible" id="g_24"></div>
+                    <div class="square notVisible" id="g_25"></div>
+                    <div class="square notVisible" id="g_26"></div>
+                    <div class="square notVisible" id="g_27"></div>
+                    <div class="square notVisible" id="g_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="h_1"></div>
+                    <div class="square notVisible" id="h_2"></div>
+                    <div class="square notVisible" id="h_3"></div>
+                    <div class="square notVisible" id="h_4"></div>
+                    <div class="square notVisible" id="h_5"></div>
+                    <div class="square notVisible" id="h_6"></div>
+                    <div class="square notVisible" id="h_7"></div>
+                    <div class="square notVisible" id="h_8"></div>
+                    <div class="square notVisible" id="h_9"></div>
+                    <div class="square notVisible" id="h_10"></div>
+                    <div class="square notVisible" id="h_11"></div>
+                    <div class="square notVisible" id="h_12"></div>
+                    <div class="square notVisible" id="h_13"></div>
+                    <div class="square notVisible" id="h_14"></div>
+                    <div class="square notVisible" id="h_15"></div>
+                    <div class="square notVisible" id="h_16"></div>
+                    <div class="square notVisible" id="h_17"></div>
+                    <div class="square notVisible" id="h_18"></div>
+                    <div class="square notVisible" id="h_19"></div>
+                    <div class="square notVisible" id="h_20"></div>
+                    <div class="square notVisible" id="h_21"></div>
+                    <div class="square notVisible" id="h_22"></div>
+                    <div class="square notVisible" id="h_23"></div>
+                    <div class="square notVisible" id="h_24"></div>
+                    <div class="square notVisible" id="h_25"></div>
+                    <div class="square notVisible" id="h_26"></div>
+                    <div class="square notVisible" id="h_27"></div>
+                    <div class="square notVisible" id="h_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="i_1"></div>
+                    <div class="square notVisible" id="i_2"></div>
+                    <div class="square notVisible" id="i_3"></div>
+                    <div class="square notVisible" id="i_4"></div>
+                    <div class="square notVisible" id="i_5"></div>
+                    <div class="square notVisible" id="i_6"></div>
+                    <div class="square notVisible" id="i_7"></div>
+                    <div class="square notVisible" id="i_8"></div>
+                    <div class="square notVisible" id="i_9"></div>
+                    <div class="square notVisible" id="i_10"></div>
+                    <div class="square notVisible" id="i_11"></div>
+                    <div class="square notVisible" id="i_12"></div>
+                    <div class="square notVisible" id="i_13"></div>
+                    <div class="square notVisible" id="i_14"></div>
+                    <div class="square notVisible" id="i_15"></div>
+                    <div class="square notVisible" id="i_16"></div>
+                    <div class="square notVisible" id="i_17"></div>
+                    <div class="square notVisible" id="i_18"></div>
+                    <div class="square notVisible" id="i_19"></div>
+                    <div class="square notVisible" id="i_20"></div>
+                    <div class="square notVisible" id="i_21"></div>
+                    <div class="square notVisible" id="i_22"></div>
+                    <div class="square notVisible" id="i_23"></div>
+                    <div class="square notVisible" id="i_24"></div>
+                    <div class="square notVisible" id="i_25"></div>
+                    <div class="square notVisible" id="i_26"></div>
+                    <div class="square notVisible" id="i_27"></div>
+                    <div class="square notVisible" id="i_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="j_1"></div>
+                    <div class="square notVisible" id="j_2"></div>
+                    <div class="square notVisible" id="j_3"></div>
+                    <div class="square notVisible" id="j_4"></div>
+                    <div class="square notVisible" id="j_5"></div>
+                    <div class="square notVisible" id="j_6"></div>
+                    <div class="square notVisible" id="j_7"></div>
+                    <div class="square notVisible" id="j_8"></div>
+                    <div class="square notVisible" id="j_9"></div>
+                    <div class="square notVisible" id="j_10"></div>
+                    <div class="square notVisible" id="j_11"></div>
+                    <div class="square notVisible" id="j_12"></div>
+                    <div class="square notVisible" id="j_13"></div>
+                    <div class="square notVisible" id="j_14"></div>
+                    <div class="square notVisible" id="j_15"></div>
+                    <div class="square notVisible" id="j_16"></div>
+                    <div class="square notVisible" id="j_17"></div>
+                    <div class="square notVisible" id="j_18"></div>
+                    <div class="square notVisible" id="j_19"></div>
+                    <div class="square notVisible" id="j_20"></div>
+                    <div class="square notVisible" id="j_21"></div>
+                    <div class="square notVisible" id="j_22"></div>
+                    <div class="square notVisible" id="j_23"></div>
+                    <div class="square notVisible" id="j_24"></div>
+                    <div class="square notVisible" id="j_25"></div>
+                    <div class="square notVisible" id="j_26"></div>
+                    <div class="square notVisible" id="j_27"></div>
+                    <div class="square notVisible" id="j_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="k_1"></div>
+                    <div class="square notVisible" id="k_2"></div>
+                    <div class="square notVisible" id="k_3"></div>
+                    <div class="square notVisible" id="k_4"></div>
+                    <div class="square notVisible" id="k_5"></div>
+                    <div class="square notVisible" id="k_6"></div>
+                    <div class="square notVisible" id="k_7"></div>
+                    <div class="square notVisible" id="k_8"></div>
+                    <div class="square notVisible" id="k_9"></div>
+                    <div class="square notVisible" id="k_10"></div>
+                    <div class="square notVisible" id="k_11"></div>
+                    <div class="square notVisible" id="k_12"></div>
+                    <div class="square notVisible" id="k_13"></div>
+                    <div class="square notVisible" id="k_14"></div>
+                    <div class="square notVisible" id="k_15"></div>
+                    <div class="square notVisible" id="k_16"></div>
+                    <div class="square notVisible" id="k_17"></div>
+                    <div class="square notVisible" id="k_18"></div>
+                    <div class="square notVisible" id="k_19"></div>
+                    <div class="square notVisible" id="k_20"></div>
+                    <div class="square notVisible" id="k_21"></div>
+                    <div class="square notVisible" id="k_22"></div>
+                    <div class="square notVisible" id="k_23"></div>
+                    <div class="square notVisible" id="k_24"></div>
+                    <div class="square notVisible" id="k_25"></div>
+                    <div class="square notVisible" id="k_26"></div>
+                    <div class="square notVisible" id="k_27"></div>
+                    <div class="square notVisible" id="k_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="l_1"></div>
+                    <div class="square notVisible" id="l_2"></div>
+                    <div class="square notVisible" id="l_3"></div>
+                    <div class="square notVisible" id="l_4"></div>
+                    <div class="square notVisible" id="l_5"></div>
+                    <div class="square notVisible" id="l_6"></div>
+                    <div class="square notVisible" id="l_7"></div>
+                    <div class="square notVisible" id="l_8"></div>
+                    <div class="square notVisible" id="l_9"></div>
+                    <div class="square notVisible" id="l_10"></div>
+                    <div class="square notVisible" id="l_11"></div>
+                    <div class="square notVisible" id="l_12"></div>
+                    <div class="square notVisible" id="l_13"></div>
+                    <div class="square notVisible" id="l_14"></div>
+                    <div class="square notVisible" id="l_15"></div>
+                    <div class="square notVisible" id="l_16"></div>
+                    <div class="square notVisible" id="l_17"></div>
+                    <div class="square notVisible" id="l_18"></div>
+                    <div class="square notVisible" id="l_19"></div>
+                    <div class="square notVisible" id="l_20"></div>
+                    <div class="square notVisible" id="l_21"></div>
+                    <div class="square notVisible" id="l_22"></div>
+                    <div class="square notVisible" id="l_23"></div>
+                    <div class="square notVisible" id="l_24"></div>
+                    <div class="square notVisible" id="l_25"></div>
+                    <div class="square notVisible" id="l_26"></div>
+                    <div class="square notVisible" id="l_27"></div>
+                    <div class="square notVisible" id="l_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="m_1"></div>
+                    <div class="square notVisible" id="m_2"></div>
+                    <div class="square notVisible" id="m_3"></div>
+                    <div class="square notVisible" id="m_4"></div>
+                    <div class="square notVisible" id="m_5"></div>
+                    <div class="square notVisible" id="m_6"></div>
+                    <div class="square notVisible" id="m_7"></div>
+                    <div class="square notVisible" id="m_8"></div>
+                    <div class="square notVisible" id="m_9"></div>
+                    <div class="square notVisible" id="m_10"></div>
+                    <div class="square notVisible" id="m_11"></div>
+                    <div class="square notVisible" id="m_12"></div>
+                    <div class="square notVisible" id="m_13"></div>
+                    <div class="square notVisible" id="m_14"></div>
+                    <div class="square notVisible" id="m_15"></div>
+                    <div class="square notVisible" id="m_16"></div>
+                    <div class="square notVisible" id="m_17"></div>
+                    <div class="square notVisible" id="m_18"></div>
+                    <div class="square notVisible" id="m_19"></div>
+                    <div class="square notVisible" id="m_20"></div>
+                    <div class="square notVisible" id="m_21"></div>
+                    <div class="square notVisible" id="m_22"></div>
+                    <div class="square notVisible" id="m_23"></div>
+                    <div class="square notVisible" id="m_24"></div>
+                    <div class="square notVisible" id="m_25"></div>
+                    <div class="square notVisible" id="m_26"></div>
+                    <div class="square notVisible" id="m_27"></div>
+                    <div class="square notVisible" id="m_28"></div>
+                  </div>
+                  <div class="col-lg-10 col-md-10">
+                    <div class="square notVisible" id="n_1"></div>
+                    <div class="square notVisible" id="n_2"></div>
+                    <div class="square notVisible" id="n_3"></div>
+                    <div class="square notVisible" id="n_4"></div>
+                    <div class="square notVisible" id="n_5"></div>
+                    <div class="square notVisible" id="n_6"></div>
+                    <div class="square notVisible" id="n_7"></div>
+                    <div class="square notVisible" id="n_8"></div>
+                    <div class="square notVisible" id="n_9"></div>
+                    <div class="square notVisible" id="n_10"></div>
+                    <div class="square notVisible" id="n_11"></div>
+                    <div class="square notVisible" id="n_12"></div>
+                    <div class="square notVisible" id="n_13"></div>
+                    <div class="square notVisible" id="n_14"></div>
+                    <div class="square notVisible" id="n_15"></div>
+                    <div class="square notVisible" id="n_16"></div>
+                    <div class="square notVisible" id="n_17"></div>
+                    <div class="square notVisible" id="n_18"></div>
+                    <div class="square notVisible" id="n_19"></div>
+                    <div class="square notVisible" id="n_20"></div>
+                    <div class="square notVisible" id="n_21"></div>
+                    <div class="square notVisible" id="n_22"></div>
+                    <div class="square notVisible" id="n_23"></div>
+                    <div class="square notVisible" id="n_24"></div>
+                    <div class="square notVisible" id="n_25"></div>
+                    <div class="square notVisible" id="n_26"></div>
+                    <div class="square notVisible" id="n_27"></div>
+                    <div class="square notVisible" id="n_28"></div>
+                  </div>
+                
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="o_1"></div>
+                  <div class="square notVisible" id="o_2"></div>
+                  <div class="square notVisible" id="o_3"></div>
+                  <div class="square notVisible" id="o_4"></div>
+                  <div class="square notVisible" id="o_5"></div>
+                  <div class="square notVisible" id="o_6"></div>
+                  <div class="square notVisible" id="o_7"></div>
+                  <div class="square notVisible" id="o_8"></div>
+                  <div class="square notVisible" id="o_9"></div>
+                  <div class="square notVisible" id="o_10"></div>
+                  <div class="square notVisible" id="o_11"></div>
+                  <div class="square notVisible" id="o_12"></div>
+                  <div class="square notVisible" id="o_13"></div>
+                  <div class="square notVisible" id="o_14"></div>
+                  <div class="square notVisible" id="o_15"></div>
+                  <div class="square notVisible" id="o_16"></div>
+                  <div class="square notVisible" id="o_17"></div>
+                  <div class="square notVisible" id="o_18"></div>
+                  <div class="square notVisible" id="o_19"></div>
+                  <div class="square notVisible" id="o_20"></div>
+                  <div class="square notVisible" id="o_21"></div>
+                  <div class="square notVisible" id="o_22"></div>
+                  <div class="square notVisible" id="o_23"></div>
+                  <div class="square notVisible" id="o_24"></div>
+                  <div class="square notVisible" id="o_25"></div>
+                  <div class="square notVisible" id="o_26"></div>
+                  <div class="square notVisible" id="o_27"></div>
+                  <div class="square notVisible" id="o_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="p_1"></div>
+                  <div class="square notVisible" id="p_2"></div>
+                  <div class="square notVisible" id="p_3"></div>
+                  <div class="square notVisible" id="p_4"></div>
+                  <div class="square notVisible" id="p_5"></div>
+                  <div class="square notVisible" id="p_6"></div>
+                  <div class="square notVisible" id="p_7"></div>
+                  <div class="square notVisible" id="p_8"></div>
+                  <div class="square notVisible" id="p_9"></div>
+                  <div class="square notVisible" id="p_10"></div>
+                  <div class="square notVisible" id="p_11"></div>
+                  <div class="square notVisible" id="p_12"></div>
+                  <div class="square notVisible" id="p_13"></div>
+                  <div class="square notVisible" id="p_14"></div>
+                  <div class="square notVisible" id="p_15"></div>
+                  <div class="square notVisible" id="p_16"></div>
+                  <div class="square notVisible" id="p_17"></div>
+                  <div class="square notVisible" id="p_18"></div>
+                  <div class="square notVisible" id="p_19"></div>
+                  <div class="square notVisible" id="p_20"></div>
+                  <div class="square notVisible" id="p_21"></div>
+                  <div class="square notVisible" id="p_22"></div>
+                  <div class="square notVisible" id="p_23"></div>
+                  <div class="square notVisible" id="p_24"></div>
+                  <div class="square notVisible" id="p_25"></div>
+                  <div class="square notVisible" id="p_26"></div>
+                  <div class="square notVisible" id="p_27"></div>
+                  <div class="square notVisible" id="p_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="q_1"></div>
+                  <div class="square notVisible" id="q_2"></div>
+                  <div class="square notVisible" id="q_3"></div>
+                  <div class="square notVisible" id="q_4"></div>
+                  <div class="square notVisible" id="q_5"></div>
+                  <div class="square notVisible" id="q_6"></div>
+                  <div class="square notVisible" id="q_7"></div>
+                  <div class="square notVisible" id="q_8"></div>
+                  <div class="square notVisible" id="q_9"></div>
+                  <div class="square notVisible" id="q_10"></div>
+                  <div class="square notVisible" id="q_11"></div>
+                  <div class="square notVisible" id="q_12"></div>
+                  <div class="square notVisible" id="q_13"></div>
+                  <div class="square notVisible" id="q_14"></div>
+                  <div class="square notVisible" id="q_15"></div>
+                  <div class="square notVisible" id="q_16"></div>
+                  <div class="square notVisible" id="q_17"></div>
+                  <div class="square notVisible" id="q_18"></div>
+                  <div class="square notVisible" id="q_19"></div>
+                  <div class="square notVisible" id="q_20"></div>
+                  <div class="square notVisible" id="q_21"></div>
+                  <div class="square notVisible" id="q_22"></div>
+                  <div class="square notVisible" id="q_23"></div>
+                  <div class="square notVisible" id="q_24"></div>
+                  <div class="square notVisible" id="q_25"></div>
+                  <div class="square notVisible" id="q_26"></div>
+                  <div class="square notVisible" id="q_27"></div>
+                  <div class="square notVisible" id="q_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="r_1"></div>
+                  <div class="square notVisible" id="r_2"></div>
+                  <div class="square notVisible" id="r_3"></div>
+                  <div class="square notVisible" id="r_4"></div>
+                  <div class="square notVisible" id="r_5"></div>
+                  <div class="square notVisible" id="r_6"></div>
+                  <div class="square notVisible" id="r_7"></div>
+                  <div class="square notVisible" id="r_8"></div>
+                  <div class="square notVisible" id="r_9"></div>
+                  <div class="square notVisible" id="r_10"></div>
+                  <div class="square notVisible" id="r_11"></div>
+                  <div class="square notVisible" id="r_12"></div>
+                  <div class="square notVisible" id="r_13"></div>
+                  <div class="square notVisible" id="r_14"></div>
+                  <div class="square notVisible" id="r_15"></div>
+                  <div class="square notVisible" id="r_16"></div>
+                  <div class="square notVisible" id="r_17"></div>
+                  <div class="square notVisible" id="r_18"></div>
+                  <div class="square notVisible" id="r_19"></div>
+                  <div class="square notVisible" id="r_20"></div>
+                  <div class="square notVisible" id="r_21"></div>
+                  <div class="square notVisible" id="r_22"></div>
+                  <div class="square notVisible" id="r_23"></div>
+                  <div class="square notVisible" id="r_24"></div>
+                  <div class="square notVisible" id="r_25"></div>
+                  <div class="square notVisible" id="r_26"></div>
+                  <div class="square notVisible" id="r_27"></div>
+                  <div class="square notVisible" id="r_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="s_1"></div>
+                  <div class="square notVisible" id="s_2"></div>
+                  <div class="square notVisible" id="s_3"></div>
+                  <div class="square notVisible" id="s_4"></div>
+                  <div class="square notVisible" id="s_5"></div>
+                  <div class="square notVisible" id="s_6"></div>
+                  <div class="square notVisible" id="s_7"></div>
+                  <div class="square notVisible" id="s_8"></div>
+                  <div class="square notVisible" id="s_9"></div>
+                  <div class="square notVisible" id="s_10"></div>
+                  <div class="square notVisible" id="s_11"></div>
+                  <div class="square notVisible" id="s_12"></div>
+                  <div class="square notVisible" id="s_13"></div>
+                  <div class="square notVisible" id="s_14"></div>
+                  <div class="square notVisible" id="s_15"></div>
+                  <div class="square notVisible" id="s_16"></div>
+                  <div class="square notVisible" id="s_17"></div>
+                  <div class="square notVisible" id="s_18"></div>
+                  <div class="square notVisible" id="s_19"></div>
+                  <div class="square notVisible" id="s_20"></div>
+                  <div class="square notVisible" id="s_21"></div>
+                  <div class="square notVisible" id="s_22"></div>
+                  <div class="square notVisible" id="s_23"></div>
+                  <div class="square notVisible" id="s_24"></div>
+                  <div class="square notVisible" id="s_25"></div>
+                  <div class="square notVisible" id="s_26"></div>
+                  <div class="square notVisible" id="s_27"></div>
+                  <div class="square notVisible" id="s_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="t_1"></div>
+                  <div class="square notVisible" id="t_2"></div>
+                  <div class="square notVisible" id="t_3"></div>
+                  <div class="square notVisible" id="t_4"></div>
+                  <div class="square notVisible" id="t_5"></div>
+                  <div class="square notVisible" id="t_6"></div>
+                  <div class="square notVisible" id="t_7"></div>
+                  <div class="square notVisible" id="t_8"></div>
+                  <div class="square notVisible" id="t_9"></div>
+                  <div class="square notVisible" id="t_10"></div>
+                  <div class="square notVisible" id="t_11"></div>
+                  <div class="square notVisible" id="t_12"></div>
+                  <div class="square notVisible" id="t_13"></div>
+                  <div class="square notVisible" id="t_14"></div>
+                  <div class="square notVisible" id="t_15"></div>
+                  <div class="square notVisible" id="t_16"></div>
+                  <div class="square notVisible" id="t_17"></div>
+                  <div class="square notVisible" id="t_18"></div>
+                  <div class="square notVisible" id="t_19"></div>
+                  <div class="square notVisible" id="t_20"></div>
+                  <div class="square notVisible" id="t_21"></div>
+                  <div class="square notVisible" id="t_22"></div>
+                  <div class="square notVisible" id="t_23"></div>
+                  <div class="square notVisible" id="t_24"></div>
+                  <div class="square notVisible" id="t_25"></div>
+                  <div class="square notVisible" id="t_26"></div>
+                  <div class="square notVisible" id="t_27"></div>
+                  <div class="square notVisible" id="t_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="u_1"></div>
+                  <div class="square notVisible" id="u_2"></div>
+                  <div class="square notVisible" id="u_3"></div>
+                  <div class="square notVisible" id="u_4"></div>
+                  <div class="square notVisible" id="u_5"></div>
+                  <div class="square notVisible" id="u_6"></div>
+                  <div class="square notVisible" id="u_7"></div>
+                  <div class="square notVisible" id="u_8"></div>
+                  <div class="square notVisible" id="u_9"></div>
+                  <div class="square notVisible" id="u_10"></div>
+                  <div class="square notVisible" id="u_11"></div>
+                  <div class="square notVisible" id="u_12"></div>
+                  <div class="square notVisible" id="u_13"></div>
+                  <div class="square notVisible" id="u_14"></div>
+                  <div class="square notVisible" id="u_15"></div>
+                  <div class="square notVisible" id="u_16"></div>
+                  <div class="square notVisible" id="u_17"></div>
+                  <div class="square notVisible" id="u_18"></div>
+                  <div class="square notVisible" id="u_19"></div>
+                  <div class="square notVisible" id="u_20"></div>
+                  <div class="square notVisible" id="u_21"></div>
+                  <div class="square notVisible" id="u_22"></div>
+                  <div class="square notVisible" id="u_23"></div>
+                  <div class="square notVisible" id="u_24"></div>
+                  <div class="square notVisible" id="u_25"></div>
+                  <div class="square notVisible" id="u_26"></div>
+                  <div class="square notVisible" id="u_27"></div>
+                  <div class="square notVisible" id="u_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="v_1"></div>
+                  <div class="square notVisible" id="v_2"></div>
+                  <div class="square notVisible" id="v_3"></div>
+                  <div class="square notVisible" id="v_4"></div>
+                  <div class="square notVisible" id="v_5"></div>
+                  <div class="square notVisible" id="v_6"></div>
+                  <div class="square notVisible" id="v_7"></div>
+                  <div class="square notVisible" id="v_8"></div>
+                  <div class="square notVisible" id="v_9"></div>
+                  <div class="square notVisible" id="v_10"></div>
+                  <div class="square notVisible" id="v_11"></div>
+                  <div class="square notVisible" id="v_12"></div>
+                  <div class="square notVisible" id="v_13"></div>
+                  <div class="square notVisible" id="v_14"></div>
+                  <div class="square notVisible" id="v_15"></div>
+                  <div class="square notVisible" id="v_16"></div>
+                  <div class="square notVisible" id="v_17"></div>
+                  <div class="square notVisible" id="v_18"></div>
+                  <div class="square notVisible" id="v_19"></div>
+                  <div class="square notVisible" id="v_20"></div>
+                  <div class="square notVisible" id="v_21"></div>
+                  <div class="square notVisible" id="v_22"></div>
+                  <div class="square notVisible" id="v_23"></div>
+                  <div class="square notVisible" id="v_24"></div>
+                  <div class="square notVisible" id="v_25"></div>
+                  <div class="square notVisible" id="v_26"></div>
+                  <div class="square notVisible" id="v_27"></div>
+                  <div class="square notVisible" id="v_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="w_1"></div>
+                  <div class="square notVisible" id="w_2"></div>
+                  <div class="square notVisible" id="w_3"></div>
+                  <div class="square notVisible" id="w_4"></div>
+                  <div class="square notVisible" id="w_5"></div>
+                  <div class="square notVisible" id="w_6"></div>
+                  <div class="square notVisible" id="w_7"></div>
+                  <div class="square notVisible" id="w_8"></div>
+                  <div class="square notVisible" id="w_9"></div>
+                  <div class="square notVisible" id="w_10"></div>
+                  <div class="square notVisible" id="w_11"></div>
+                  <div class="square notVisible" id="w_12"></div>
+                  <div class="square notVisible" id="w_13"></div>
+                  <div class="square notVisible" id="w_14"></div>
+                  <div class="square notVisible" id="w_15"></div>
+                  <div class="square notVisible" id="w_16"></div>
+                  <div class="square notVisible" id="w_17"></div>
+                  <div class="square notVisible" id="w_18"></div>
+                  <div class="square notVisible" id="w_19"></div>
+                  <div class="square notVisible" id="w_20"></div>
+                  <div class="square notVisible" id="w_21"></div>
+                  <div class="square notVisible" id="w_22"></div>
+                  <div class="square notVisible" id="w_23"></div>
+                  <div class="square notVisible" id="w_24"></div>
+                  <div class="square notVisible" id="w_25"></div>
+                  <div class="square notVisible" id="w_26"></div>
+                  <div class="square notVisible" id="w_27"></div>
+                  <div class="square notVisible" id="w_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="x_1"></div>
+                  <div class="square notVisible" id="x_2"></div>
+                  <div class="square notVisible" id="x_3"></div>
+                  <div class="square notVisible" id="x_4"></div>
+                  <div class="square notVisible" id="x_5"></div>
+                  <div class="square notVisible" id="x_6"></div>
+                  <div class="square notVisible" id="x_7"></div>
+                  <div class="square notVisible" id="x_8"></div>
+                  <div class="square notVisible" id="x_9"></div>
+                  <div class="square notVisible" id="x_10"></div>
+                  <div class="square notVisible" id="x_11"></div>
+                  <div class="square notVisible" id="x_12"></div>
+                  <div class="square notVisible" id="x_13"></div>
+                  <div class="square notVisible" id="x_14"></div>
+                  <div class="square notVisible" id="x_15"></div>
+                  <div class="square notVisible" id="x_16"></div>
+                  <div class="square notVisible" id="x_17"></div>
+                  <div class="square notVisible" id="x_18"></div>
+                  <div class="square notVisible" id="x_19"></div>
+                  <div class="square notVisible" id="x_20"></div>
+                  <div class="square notVisible" id="x_21"></div>
+                  <div class="square notVisible" id="x_22"></div>
+                  <div class="square notVisible" id="x_23"></div>
+                  <div class="square notVisible" id="x_24"></div>
+                  <div class="square notVisible" id="x_25"></div>
+                  <div class="square notVisible" id="x_26"></div>
+                  <div class="square notVisible" id="x_27"></div>
+                  <div class="square notVisible" id="x_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="y_1"></div>
+                  <div class="square notVisible" id="y_2"></div>
+                  <div class="square notVisible" id="y_3"></div>
+                  <div class="square notVisible" id="y_4"></div>
+                  <div class="square notVisible" id="y_5"></div>
+                  <div class="square notVisible" id="y_6"></div>
+                  <div class="square notVisible" id="y_7"></div>
+                  <div class="square notVisible" id="y_8"></div>
+                  <div class="square notVisible" id="y_9"></div>
+                  <div class="square notVisible" id="y_10"></div>
+                  <div class="square notVisible" id="y_11"></div>
+                  <div class="square notVisible" id="y_12"></div>
+                  <div class="square notVisible" id="y_13"></div>
+                  <div class="square notVisible" id="y_14"></div>
+                  <div class="square notVisible" id="y_15"></div>
+                  <div class="square notVisible" id="y_16"></div>
+                  <div class="square notVisible" id="y_17"></div>
+                  <div class="square notVisible" id="y_18"></div>
+                  <div class="square notVisible" id="y_19"></div>
+                  <div class="square notVisible" id="y_20"></div>
+                  <div class="square notVisible" id="y_21"></div>
+                  <div class="square notVisible" id="y_22"></div>
+                  <div class="square notVisible" id="y_23"></div>
+                  <div class="square notVisible" id="y_24"></div>
+                  <div class="square notVisible" id="y_25"></div>
+                  <div class="square notVisible" id="y_26"></div>
+                  <div class="square notVisible" id="y_27"></div>
+                  <div class="square notVisible" id="y_28"></div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                  <div class="square notVisible" id="z_1"></div>
+                  <div class="square notVisible" id="z_2"></div>
+                  <div class="square notVisible" id="z_3"></div>
+                  <div class="square notVisible" id="z_4"></div>
+                  <div class="square notVisible" id="z_5"></div>
+                  <div class="square notVisible" id="z_6"></div>
+                  <div class="square notVisible" id="z_7"></div>
+                  <div class="square notVisible" id="z_8"></div>
+                  <div class="square notVisible" id="z_9"></div>
+                  <div class="square notVisible" id="z_10"></div>
+                  <div class="square notVisible" id="z_11"></div>
+                  <div class="square notVisible" id="z_12"></div>
+                  <div class="square notVisible" id="z_13"></div>
+                  <div class="square notVisible" id="z_14"></div>
+                  <div class="square notVisible" id="z_15"></div>
+                  <div class="square notVisible" id="z_16"></div>
+                  <div class="square notVisible" id="z_17"></div>
+                  <div class="square notVisible" id="z_18"></div>
+                  <div class="square notVisible" id="z_19"></div>
+                  <div class="square notVisible" id="z_20"></div>
+                  <div class="square notVisible" id="z_21"></div>
+                  <div class="square notVisible" id="z_22"></div>
+                  <div class="square notVisible" id="z_23"></div>
+                  <div class="square notVisible" id="z_24"></div>
+                  <div class="square notVisible" id="z_25"></div>
+                  <div class="square notVisible" id="z_26"></div>
+                  <div class="square notVisible" id="z_27"></div>
+                  <div class="square notVisible" id="z_28"></div>
+                </div>
+				</div>
+
+
+
+              </div>
+              <div class="col-lg-4 col-md-4">
+                <div class="row" id="playerOneBox">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                      Player One
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item" id="playerOneCharacterA">Character A <span class="badge badge-pill badge-success"></span>
+                      </li>
+                      <li class="list-group-item" id="playerOneCharacterB">Character B <span class="badge badge-pill badge-success"></span>
+                      </li>
+                      <li class="list-group-item" id="playerOneCharacterC">Character C<span class="badge badge-pill badge-danger"></span>
+                      </li>
+                      <li class="list-group-item" id="playerOneCharacterD">Character D<span class="badge badge-pill badge-danger"></span>
+                      </li>
+
+                    </ul>
+                  </div>
+			
+                </div>
+                <div class="row">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                      Player Two
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item" id="playerTwoCharacterA">??? <span class="badge badge-pill badge-success"></span>
+                      </li>
+                      <li class="list-group-item" id="playerTwoCharacterB">??? <span class="badge badge-pill badge-success"></span>
+                      </li>
+                      <li class="list-group-item" id="playerTwoCharacterC">???<span class="badge badge-pill badge-danger"></span>
+                      </li>
+                      <li class="list-group-item" id="playerTwoCharacterD">???<span class="badge badge-pill badge-danger"></span>
+                      </li>
+
+                    </ul>
+                  </div>
+			
+                </div>
+            
+			  </div>
+
+
+        </section>
+        <section class="text-center space--xs">
+          <div class="container">
+
+          </div>
+        </section>
+
+  </body>
+
+</html>

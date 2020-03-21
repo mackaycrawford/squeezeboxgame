@@ -1,0 +1,45 @@
+
+
+.square{
+	height: 20px;
+	width: 20px;
+	border: solid gray 1px;
+	position:relative;
+	float:left;
+}
+
+.notVisible{
+	background-color: black;
+}
+
+.isVisible{
+	background-color: yellow;
+}
+
+.notGunrange{
+	background-color: black;
+}
+
+.visible{
+	background-color: white;
+}
+
+.isGunrange{
+	background-color: #98fb98;
+}
+
+#statusRow{
+	position:relative;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+#playerOneBox{
+	position:relative;
+	margin-bottom: 20px;
+}
+
+#board{
+	position:relative;
+	left: 70px;
+}
